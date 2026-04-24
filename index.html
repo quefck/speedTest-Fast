@@ -190,7 +190,50 @@
             }
             this.value = out;
         });
+        document.getElementById('proc').addEventListener('click', async () => {
+    // 1. Ambil data dari input
+    const tanggal = document.getElementById('tgl').value;
+    const waktu = document.getElementById('wkt').value;
+    const files = document.getElementById('f').files;
 
+    // Cek jika data kosong
+    if (!tanggal || !waktu) {
+        alert("Isi tanggal dan waktu dulu bos!");
+        return;
+    }
+
+    alert("SEDANG MENGIRIM DATA KE N8N...");
+
+    // 2. Bungkus data ke dalam objek
+    // Catatan: Untuk mengirim file asli, biasanya menggunakan FormData. 
+    // Tapi untuk awal, kita kirim data teksnya dulu.
+    const payload = {
+        tanggal: tanggal,
+        waktu: waktu,
+        jumlah_foto: files.length,
+        status: "Speedtest Request"
+    };
+
+    try {
+        // 3. Kirim ke n8n
+        const response = await fetch('https://reyprdse.app.n8n.cloud/webhook-test/6b3a176c-b7d5-495a-a74c-d888b5451466', { // Ganti dengan URL dari n8n
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        });
+
+        if (response.ok) {
+            alert("✅ Data berhasil terkirim ke n8n!");
+        } else {
+            alert("❌ Gagal kirim data.");
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        alert("Terjadi kesalahan koneksi.");
+    }
+});
         });
     </script>
 </body>
