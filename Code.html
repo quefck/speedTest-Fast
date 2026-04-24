@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uploud Speed Test Harian</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
+        body { background-color: #000; color: #fff; min-height: 100vh; overflow-x: hidden; }
+
+        /* Navigasi */
+        .navbar { display: flex; justify-content: flex-end; padding: 30px 50px; }
+        .nav-links a { color: #fff; text-decoration: none; margin-left: 30px; font-size: 14px; opacity: 0.7; }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 50px 10%;
+            transition: all 0.5s ease;
+        }
+
+        /* Sisi Kiri */
+        .left-side { flex: 1; }
+        h1 { font-size: 3.5rem; margin-bottom: 10px; }
+        p { color: #888; margin-bottom: 30px; }
+        
+        #startBtn {
+            background: #28a745; color: #fff; border: none;
+            padding: 15px 40px; border-radius: 5px; cursor: pointer; font-weight: bold;
+        }
+
+        /* Sisi Kanan (Dashboard) */
+        .right-side {
+            flex: 1;
+            max-width: 400px;
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 20px;
+            /* Kita buat transparan dulu */
+            opacity: 0;
+            transform: translateX(100px);
+            pointer-events: none;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* Class untuk memunculkan dashboard */
+        .show-dashboard {
+            opacity: 1 !important;
+            transform: translateX(0) !important;
+            pointer-events: auto !important;
+        }
+
+        .upload-box {
+            border: 2px dashed #28a745;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+        .small-text { font-size: 10px; color: #666; display: block; margin-bottom: 20px; }
+        
+        .input-row { display: flex; gap: 10px; margin-bottom: 20px; }
+        .input-group { flex: 1; }
+        .input-group label { display: block; font-size: 11px; color: #888; margin-bottom: 5px; }
+        .input-group input {
+            width: 100%; background: #222; border: 1px solid #444;
+            padding: 8px; color: #fff; border-radius: 5px;
+        }
+
+        .process-btn {
+            width: 100%; background: #fff; color: #000; border: none;
+            padding: 12px; border-radius: 5px; font-weight: bold; cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="#">Daftar</a>
+            <a href="#">Login</a>
+            <a href="#">About</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="left-side">
+            <h1>Uploud Speed test Harian</h1>
+            <p>Gedung-gedung kementrian pekerja umum</p>
+            <button id="startBtn">Start</button>
+        </div>
+
+        <div class="right-side" id="dashboard">
+            <div class="upload-box" onclick="document.getElementById('f').click()">
+                <div style="font-size: 24px; color: #28a745;">+ + +</div>
+                <div style="font-size: 14px;">Import Photo</div>
+                <input type="file" id="f" hidden multiple>
+            </div>
+            <span class="small-text">*maximal photo 8</span>
+
+            <div class="input-row">
+                <div class="input-group">
+                    <label>Tanggal</label>
+                    <input type="text" id="tgl" placeholder="dd/mm/yyyy">
+                </div>
+                <div class="input-group">
+                    <label>Waktu</label>
+                    <input type="text" id="wkt" placeholder="00:00">
+                </div>
+            </div>
+
+            <button class="process-btn" id="proc">Processed</button>
+        </div>
+    </div>
+
+    <script>
+        const startBtn = document.getElementById('startBtn');
+        const dashboard = document.getElementById('dashboard');
+        const procBtn = document.getElementById('proc');
+
+        startBtn.addEventListener('click', () => {
+            // Munculkan dashboard dengan class CSS
+            dashboard.classList.add('show-dashboard');
+            
+            // Isi otomatis tanggal & waktu
+            const d = new Date();
+            document.getElementById('tgl').value = d.toLocaleDateString('id-ID');
+            document.getElementById('wkt').value = d.getHours() + ':' + d.getMinutes();
+            
+            // Opsional: hilangkan tombol start biar rapi
+            startBtn.style.opacity = '0.3';
+            startBtn.innerText = 'Running...';
+        });
+
+        procBtn.addEventListener('click', () => {
+            alert('Mengirim ke n8n...');
+            // Di sini nanti tempat kode fetch n8n kamu
+        });
+    </script>
+</body>
+</html>
