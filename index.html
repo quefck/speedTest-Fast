@@ -5,87 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Uploud Speed Test Harian</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
-        body { background-color: #000; color: #fff; min-height: 100vh; overflow-x: hidden; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: #000; color: #fff; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 
-        /* Navigasi */
-        .navbar { display: flex; justify-content: flex-end; padding: 30px 50px; }
-        .nav-links a { color: #fff; text-decoration: none; margin-left: 30px; font-size: 14px; opacity: 0.7; }
-
-        .container {
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-            padding: 50px 10%;
-            transition: all 0.5s ease;
-        }
-
-        /* Sisi Kiri */
-        .left-side { flex: 1; }
-        h1 { font-size: 3.5rem; margin-bottom: 10px; }
-        p { color: #888; margin-bottom: 30px; }
+        .container { display: flex; width: 90%; max-width: 1100px; align-items: center; justify-content: space-between; gap: 50px; }
         
-        #startBtn {
-            background: #28a745; color: #fff; border: none;
-            padding: 15px 40px; border-radius: 5px; cursor: pointer; font-weight: bold;
-        }
+        .left-side { flex: 1.2; }
+        h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 10px; font-weight: 800; }
+        p { color: #888; font-size: 1.2rem; margin-bottom: 30px; }
+        
+        #startBtn { background: #28a745; color: #fff; border: none; padding: 18px 50px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 1.1rem; transition: 0.3s; }
+        #startBtn:hover { background: #218838; transform: scale(1.05); }
 
-        /* Sisi Kanan (Dashboard) */
         .right-side {
-            flex: 1;
-            max-width: 400px;
-            background: rgba(255,255,255,0.05);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 30px;
-            border-radius: 20px;
-            /* Kita buat transparan dulu */
-            opacity: 0;
-            transform: translateX(100px);
-            pointer-events: none;
-            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            flex: 1; max-width: 450px; background: rgba(255,255,255,0.05); backdrop-filter: blur(25px);
+            border: 1px solid rgba(255,255,255,0.1); padding: 30px; border-radius: 20px;
+            opacity: 0; transform: translateX(100px); pointer-events: none; transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        /* Class untuk memunculkan dashboard */
-        .show-dashboard {
-            opacity: 1 !important;
-            transform: translateX(0) !important;
-            pointer-events: auto !important;
-        }
+        .show-dashboard { opacity: 1 !important; transform: translateX(0) !important; pointer-events: auto !important; }
 
-        .upload-box {
-            border: 2px dashed #28a745;
-            padding: 30px;
-            text-align: center;
-            border-radius: 10px;
-            margin-bottom: 5px;
-            cursor: pointer;
-        }
-        .small-text { font-size: 10px; color: #666; display: block; margin-bottom: 20px; }
+        /* Area Upload & Preview */
+        .upload-box { border: 2px dashed #28a745; padding: 20px; text-align: center; border-radius: 15px; cursor: pointer; min-height: 150px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+        .preview-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; width: 100%; margin-top: 10px; }
+        .preview-container img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 4px; border: 1px solid #28a745; }
         
-        .input-row { display: flex; gap: 10px; margin-bottom: 20px; }
+        .small-text { font-size: 11px; color: #666; display: block; margin: 10px 0 20px 0; text-align: center; }
+        
+        .input-row { display: flex; gap: 15px; margin-bottom: 25px; }
         .input-group { flex: 1; }
-        .input-group label { display: block; font-size: 11px; color: #888; margin-bottom: 5px; }
-        .input-group input {
-            width: 100%; background: #222; border: 1px solid #444;
-            padding: 8px; color: #fff; border-radius: 5px;
-        }
+        .input-group label { display: block; font-size: 12px; color: #aaa; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+        .input-group input { width: 100%; background: rgba(255,255,255,0.07); border: 1px solid #444; padding: 12px; color: #fff; border-radius: 8px; outline: none; font-size: 14px; text-align: center; }
+        .input-group input:focus { border-color: #28a745; }
 
-        .process-btn {
-            width: 100%; background: #fff; color: #000; border: none;
-            padding: 12px; border-radius: 5px; font-weight: bold; cursor: pointer;
-        }
+        .process-btn { width: 100%; background: #fff; color: #000; border: none; padding: 15px; border-radius: 10px; font-weight: 800; cursor: pointer; text-transform: uppercase; transition: 0.3s; }
+        .process-btn:hover { background: #28a745; color: #fff; }
     </style>
 </head>
 <body>
-
-    <nav class="navbar">
-        <div class="nav-links">
-            <a href="#">Daftar</a>
-            <a href="#">Login</a>
-            <a href="#">About</a>
-        </div>
-    </nav>
 
     <div class="container">
         <div class="left-side">
@@ -95,21 +52,24 @@
         </div>
 
         <div class="right-side" id="dashboard">
-            <div class="upload-box" onclick="document.getElementById('f').click()">
-                <div style="font-size: 24px; color: #28a745;">+ + +</div>
-                <div style="font-size: 14px;">Import Photo</div>
-                <input type="file" id="f" hidden multiple>
+            <div class="upload-box" id="dropZone" onclick="document.getElementById('f').click()">
+                <div id="uploadPlaceholder">
+                    <div style="font-size: 30px; color: #28a745; font-weight: bold;">+ + +</div>
+                    <div style="font-size: 14px; font-weight: 600;">Import Photo</div>
+                </div>
+                <div class="preview-container" id="preview"></div>
+                <input type="file" id="f" hidden multiple accept="image/*">
             </div>
             <span class="small-text">*maximal photo 8</span>
 
             <div class="input-row">
                 <div class="input-group">
                     <label>Tanggal</label>
-                    <input type="text" id="tgl" placeholder="dd/mm/yyyy">
+                    <input type="text" id="tgl" placeholder="DD / MM / YYYY" maxlength="10">
                 </div>
                 <div class="input-group">
                     <label>Waktu</label>
-                    <input type="text" id="wkt" placeholder="00:00">
+                    <input type="text" id="wkt" placeholder="HH : MM" maxlength="5">
                 </div>
             </div>
 
@@ -120,25 +80,84 @@
     <script>
         const startBtn = document.getElementById('startBtn');
         const dashboard = document.getElementById('dashboard');
-        const procBtn = document.getElementById('proc');
+        const fileInput = document.getElementById('f');
+        const preview = document.getElementById('preview');
+        const placeholder = document.getElementById('uploadPlaceholder');
+        const tglInput = document.getElementById('tgl');
+        const wktInput = document.getElementById('wkt');
 
+        // 1. Munculkan Dashboard
         startBtn.addEventListener('click', () => {
-            // Munculkan dashboard dengan class CSS
             dashboard.classList.add('show-dashboard');
+            startBtn.style.opacity = '0';
+            startBtn.style.pointerEvents = 'none';
             
-            // Isi otomatis tanggal & waktu
-            const d = new Date();
-            document.getElementById('tgl').value = d.toLocaleDateString('id-ID');
-            document.getElementById('wkt').value = d.getHours() + ':' + d.getMinutes();
-            
-            // Opsional: hilangkan tombol start biar rapi
-            startBtn.style.opacity = '0.3';
-            startBtn.innerText = 'Running...';
+            const now = new Date();
+            tglInput.value = now.toLocaleDateString('id-ID').replace(/\//g, ' / ');
+            wktInput.value = now.getHours().toString().padStart(2, '0') + ' : ' + now.getMinutes().toString().padStart(2, '0');
         });
 
-        procBtn.addEventListener('click', () => {
-            alert('Mengirim ke n8n...');
-            // Di sini nanti tempat kode fetch n8n kamu
+        // 2. Validasi & Preview Foto
+        fileInput.addEventListener('change', function() {
+            const files = this.files;
+            
+            if (files.length > 8) {
+                alert("⛔ CANCEL! Kamu upload " + files.length + " foto. Batasan maksimal cuma 8 foto. Silakan ulang lagi!");
+                this.value = ""; // Reset input
+                preview.innerHTML = "";
+                placeholder.style.display = "block";
+                return;
+            }
+
+            // Kalau 8 atau kurang, tampilkan preview
+            preview.innerHTML = "";
+            if (files.length > 0) {
+                placeholder.style.display = "none";
+                Array.from(files).forEach(file => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        preview.appendChild(img);
+                    }
+                    reader.readAsDataURL(file);
+                });
+            } else {
+                placeholder.style.display = "block";
+            }
+        });
+
+        // 3. Auto Format Tanggal (DD / MM / YYYY)
+        tglInput.addEventListener('input', function(e) {
+            let v = this.value.replace(/\D/g, '');
+            if (v.length > 2) v = v.substring(0,2) + ' / ' + v.substring(2);
+            if (v.length > 7) v = v.substring(0,7) + ' / ' + v.substring(7,11);
+            this.value = v;
+        });
+
+        // 4. Auto Format Waktu (HH : MM)
+        wktInput.addEventListener('input', function(e) {
+            let v = this.value.replace(/\D/g, '');
+            if (v.length > 2) v = v.substring(0,2) + ' : ' + v.substring(2,4);
+            this.value = v;
+        });
+
+        // 5. Tombol Processed
+        document.getElementById('proc').addEventListener('click', function() {
+            if (fileInput.files.length === 0) {
+                alert("Pilih foto dulu bos!");
+                return;
+            }
+            this.innerText = "SENGING TO N8N...";
+            this.style.background = "#28a745";
+            this.style.color = "#fff";
+            
+            setTimeout(() => {
+                alert("Data Terkirim! Cek di n8n.");
+                this.innerText = "PROCESSED";
+                this.style.background = "#fff";
+                this.style.color = "#000";
+            }, 1500);
         });
     </script>
 </body>
