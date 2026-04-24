@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Uploud Speed Test - Matrix Edition</title>
+    <title>Uploud Speed Test Harian</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Courier New', Courier, monospace; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
         
-        /* Canvas Matrix Background */
+        /* Background Matrix Live */
         #matrix {
             position: fixed;
             top: 0;
@@ -15,42 +15,41 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            background-color: #000;
+            background: #000;
         }
 
         body { color: #fff; min-height: 100vh; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 
-        .container { display: flex; width: 90%; max-width: 1100px; align-items: center; justify-content: space-between; gap: 50px; position: relative; z-index: 1; }
+        .container { display: flex; width: 90%; max-width: 1100px; align-items: center; justify-content: space-between; gap: 50px; }
         
-        .left-side { flex: 1.2; text-shadow: 0 0 10px #0f0; }
-        h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 10px; font-weight: 800; color: #0f0; }
-        p { color: #fff; font-size: 1.1rem; margin-bottom: 30px; background: rgba(0,0,0,0.7); display: inline-block; padding: 5px; }
+        .left-side { flex: 1.2; }
+        h1 { font-size: 4rem; line-height: 1.1; margin-bottom: 10px; font-weight: 800; text-shadow: 0 0 10px rgba(40, 167, 69, 0.5); }
+        p { color: #ccc; font-size: 1.2rem; margin-bottom: 30px; }
         
-        #startBtn { background: #0f0; color: #000; border: none; padding: 18px 50px; border-radius: 2px; cursor: pointer; font-weight: bold; font-size: 1.1rem; transition: 0.3s; box-shadow: 0 0 15px #0f0; }
-        #startBtn:hover { background: #fff; box-shadow: 0 0 30px #fff; }
+        #startBtn { background: #28a745; color: #fff; border: none; padding: 18px 50px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 1.1rem; transition: 0.3s; box-shadow: 0 0 15px rgba(40, 167, 69, 0.4); }
+        #startBtn:hover { background: #218838; transform: scale(1.05); }
 
         .right-side {
-            flex: 1; max-width: 450px; background: rgba(0, 20, 0, 0.85); backdrop-filter: blur(10px);
-            border: 1px solid #0f0; padding: 30px; border-radius: 5px;
-            opacity: 0; transform: translateY(50px); pointer-events: none; transition: all 0.5s ease;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+            flex: 1; max-width: 450px; background: rgba(255,255,255,0.05); backdrop-filter: blur(25px);
+            border: 1px solid rgba(255,255,255,0.1); padding: 30px; border-radius: 20px;
+            opacity: 0; transform: translateX(100px); pointer-events: none; transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .show-dashboard { opacity: 1 !important; transform: translateY(0) !important; pointer-events: auto !important; }
+        .show-dashboard { opacity: 1 !important; transform: translateX(0) !important; pointer-events: auto !important; }
 
-        .upload-box { border: 1px dashed #0f0; padding: 20px; text-align: center; cursor: pointer; min-height: 130px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .upload-box { border: 2px dashed #28a745; padding: 20px; text-align: center; border-radius: 15px; cursor: pointer; min-height: 150px; display: flex; flex-direction: column; align-items: center; justify-content: center; position: relative; }
         .preview-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 5px; width: 100%; margin-top: 10px; }
-        .preview-container img { width: 100%; aspect-ratio: 1; object-fit: cover; border: 1px solid #0f0; }
+        .preview-container img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 4px; border: 1px solid #28a745; }
         
-        .small-text { font-size: 11px; color: #0f0; display: block; margin: 10px 0; text-align: center; }
+        .small-text { font-size: 11px; color: #888; display: block; margin: 10px 0 20px 0; text-align: center; }
         
         .input-row { display: flex; gap: 15px; margin-bottom: 25px; }
         .input-group { flex: 1; }
-        .input-group label { display: block; font-size: 11px; color: #0f0; margin-bottom: 5px; }
-        .input-group input { width: 100%; background: #000; border: 1px solid #0f0; padding: 10px; color: #0f0; outline: none; text-align: center; font-family: monospace; }
+        .input-group label { display: block; font-size: 12px; color: #aaa; margin-bottom: 8px; text-transform: uppercase; }
+        .input-group input { width: 100%; background: rgba(255,255,255,0.07); border: 1px solid #444; padding: 12px; color: #fff; border-radius: 8px; outline: none; font-size: 14px; text-align: center; }
 
-        .process-btn { width: 100%; background: #0f0; color: #000; border: none; padding: 15px; font-weight: 800; cursor: pointer; transition: 0.3s; }
-        .process-btn:hover { background: #fff; }
+        .process-btn { width: 100%; background: #fff; color: #000; border: none; padding: 15px; border-radius: 10px; font-weight: 800; cursor: pointer; transition: 0.3s; }
+        .process-btn:hover { background: #28a745; color: #fff; }
     </style>
 </head>
 <body>
@@ -59,44 +58,44 @@
 
     <div class="container">
         <div class="left-side">
-            <h1>SYSTEM UPLOAD<br>SPEED TEST</h1>
-            <p>> Gedung Kementerian Pekerja Umum</p><br>
-            <button id="startBtn">INITIALIZE START</button>
+            <h1>Uploud Speed test Harian</h1>
+            <p>Gedung-gedung kementrian pekerja umum</p>
+            <button id="startBtn">Start</button>
         </div>
 
         <div class="right-side" id="dashboard">
             <div class="upload-box" onclick="document.getElementById('f').click()">
                 <div id="uploadPlaceholder">
-                    <div style="font-size: 20px; color: #0f0;">[ + + + ]</div>
-                    <div style="font-size: 12px; color: #0f0;">IMPORT_DATA_IMG</div>
+                    <div style="font-size: 30px; color: #28a745; font-weight: bold;">  +  </div>
+                    <div style="font-size: 14px; font-weight: 600;">Import Photo</div>
                 </div>
                 <div class="preview-container" id="preview"></div>
                 <input type="file" id="f" hidden multiple accept="image/*">
             </div>
-            <span class="small-text">SECURE_LIMIT: 8_PHOTOS</span>
+            <span class="small-text">*maximal photo 8</span>
 
             <div class="input-row">
                 <div class="input-group">
-                    <label>DATE (DD/MM/YYYY)</label>
-                    <input type="text" id="tgl" placeholder="DD/MM/YYYY" maxlength="10">
+                    <label>Tanggal</label>
+                    <input type="text" id="tgl" placeholder="DD / MM / YYYY" maxlength="14">
                 </div>
                 <div class="input-group">
-                    <label>TIME (HH:MM)</label>
-                    <input type="text" id="wkt" placeholder="HH:MM" maxlength="5">
+                    <label>Jam Sekarang</label>
+                    <input type="text" id="wkt" placeholder="HH : MM" maxlength="7">
                 </div>
             </div>
 
-            <button class="process-btn" id="proc">EXECUTE PROCESS</button>
+            <button class="process-btn" id="proc">Processed</button>
         </div>
     </div>
 
     <script>
-        // --- MATRIX BACKGROUND LOGIC ---
+        // --- MATRIX EFFECT ---
         const canvas = document.getElementById('matrix');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
-        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()*&^%";
+        const chars = "01";
         const fontSize = 16;
         const columns = canvas.width / fontSize;
         const drops = Array(Math.floor(columns)).fill(1);
@@ -104,18 +103,18 @@
         function drawMatrix() {
             ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "#0F0";
+            ctx.fillStyle = "#0f0";
             ctx.font = fontSize + "px monospace";
             for (let i = 0; i < drops.length; i++) {
-                const text = letters.charAt(Math.floor(Math.random() * letters.length));
+                const text = chars.charAt(Math.floor(Math.random() * chars.length));
                 ctx.fillText(text, i * fontSize, drops[i] * fontSize);
                 if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
                 drops[i]++;
             }
         }
-        setInterval(drawMatrix, 33);
+        setInterval(drawMatrix, 50);
 
-        // --- DASHBOARD LOGIC ---
+        // --- CORE LOGIC ---
         const startBtn = document.getElementById('startBtn');
         const dashboard = document.getElementById('dashboard');
         const fileInput = document.getElementById('f');
@@ -127,15 +126,14 @@
         startBtn.addEventListener('click', () => {
             dashboard.classList.add('show-dashboard');
             startBtn.style.display = 'none';
-            const n = new Date();
-            tglInput.value = String(n.getDate()).padStart(2,'0') + "/" + String(n.getMonth()+1).padStart(2,'0') + "/" + n.getFullYear();
-            wktInput.value = String(n.getHours()).padStart(2,'0') + ":" + String(n.getMinutes()).padStart(2,'0');
+            const now = new Date();
+            tglInput.value = String(now.getDate()).padStart(2,'0') + " / " + String(now.getMonth()+1).padStart(2,'0') + " / " + now.getFullYear();
+            wktInput.value = String(now.getHours()).padStart(2,'0') + " : " + String(now.getMinutes()).padStart(2,'0');
         });
 
-        // Validasi Foto
         fileInput.addEventListener('change', function() {
             if (this.files.length > 8) {
-                alert("⛔ ERROR: MAXIMUM 8 PHOTOS ALLOWED!");
+                alert("⛔ CANCEL! Maksimal photo 8.");
                 this.value = ""; preview.innerHTML = ""; placeholder.style.display = "block";
                 return;
             }
@@ -143,62 +141,58 @@
             if (this.files.length > 0) {
                 placeholder.style.display = "none";
                 Array.from(this.files).forEach(file => {
-                    const r = new FileReader();
-                    r.onload = e => { const i = document.createElement('img'); i.src = e.target.result; preview.appendChild(i); }
-                    r.readAsDataURL(file);
+                    const reader = new FileReader();
+                    reader.onload = e => {
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        preview.appendChild(img);
+                    }
+                    reader.readAsDataURL(file);
                 });
             }
         });
 
-        // --- SMART VALIDATION ---
-        tglInput.addEventListener('input', function(e) {
+        // Smart Formatter Tanggal (Up to 2030)
+        tglInput.addEventListener('input', function() {
             let v = this.value.replace(/\D/g, '');
             let out = "";
-            if(v.length > 0) {
-                let day = parseInt(v.substring(0,2));
-                if(day > 31) day = 31; 
-                if(v.length >= 2) out += String(day).padStart(2,'0') + "/"; else out += v;
+            if (v.length > 0) {
+                let d = parseInt(v.substring(0,2));
+                if (d > 31) d = 31;
+                out += (v.length >= 2) ? String(d).padStart(2,'0') + " / " : v;
             }
-            if(v.length > 2) {
-                let month = parseInt(v.substring(2,4));
-                if(month > 12) month = 12;
-                if(v.length >= 4) out += String(month).padStart(2,'0') + "/"; else out += v.substring(2);
+            if (v.length > 2) {
+                let m = parseInt(v.substring(2,4));
+                if (m > 12) m = 12;
+                out += (v.length >= 4) ? String(m).padStart(2,'0') + " / " : v.substring(2);
             }
-            if(v.length > 4) {
-                let yearStr = v.substring(4,8);
-                // Hanya izinkan 2025 atau 2026
-                if("2025".startsWith(yearStr) || "2026".startsWith(yearStr)) {
-                    out += yearStr;
-                } else {
-                    // Jika salah, potong angka terakhir
-                }
+            if (v.length > 4) {
+                let y = v.substring(4,8);
+                if (parseInt(y) > 2030) y = "2030";
+                out += y;
             }
             this.value = out;
         });
 
-        wktInput.addEventListener('input', function(e) {
+        // Fix Jam 12 & Smart Formatter Waktu
+        wktInput.addEventListener('input', function() {
             let v = this.value.replace(/\D/g, '');
             let out = "";
-            if(v.length > 0) {
-                let hh = parseInt(v.substring(0,2));
-                if(hh > 23) hh = 23;
-                if(v.length >= 2) out += String(hh).padStart(2,'0') + ":"; else out += v;
+            if (v.length > 0) {
+                let h = v.substring(0,2);
+                if (parseInt(h) > 23) h = "23";
+                out += (v.length >= 2) ? h + " : " : v;
             }
-            if(v.length > 2) {
-                let mm = parseInt(v.substring(2,4));
-                if(mm > 59) mm = 59;
-                out += String(mm).padStart(2,'0');
+            if (v.length > 2) {
+                let m = v.substring(2,4);
+                if (parseInt(m) > 59) m = "59";
+                out += m;
             }
             this.value = out;
         });
 
         document.getElementById('proc').addEventListener('click', () => {
-            const y = tglInput.value.split("/")[2];
-            if(y !== "2025" && y !== "2026") {
-                alert("Tahun harus 2025 atau 2026!");
-                return;
-            }
-            alert("UPLOADING TO N8N SERVER...");
+            alert("SEDANG MENGIRIM DATA KE N8N...");
         });
     </script>
 </body>
