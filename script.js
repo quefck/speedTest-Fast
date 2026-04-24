@@ -1,9 +1,9 @@
 // --- 1. CONFIG ---
-const CANVA_API_KEY = "-";
-const GPT_API_KEY = "AIzaSyBx56EpSHcwNvGb01b5CwZ4szazNNB6dMU";
+//const CANVA_API_KEY = "-";
+//const GPT_API_KEY = "";
 
 // --- 2. MATRIX EFFECT ---
-const canvas = document.getElementById('matrix');
+const canvas = dom cument.getElementById('matrix');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
