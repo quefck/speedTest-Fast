@@ -72,22 +72,19 @@
                 <div class="preview-container" id="preview"></div>
                 <input type="file" id="f" hidden multiple accept="image/*">
             </div>
-            <span class="small-text">maximal photo 8</span>
+            <span class="small-text">Maximal photo 8</span>
 
-   <div class="input-row">
-    <div class="input-group">
-        <label>Tanggal</label>
-        <input type="text" id="tgl" placeholder="Pilih Tanggal" 
-               onfocus="(this.type='date')" 
-               onblur="(this.type='text')">
-    </div>
-    <div class="input-group">
-        <label>Waktu</label>
-        <input type="text" id="wkt" placeholder="Pilih Waktu" 
-               onfocus="(this.type='time')" 
-               onblur="(this.type='text')">
-    </div>
-</div>
+            <div class="input-row">
+                <div class="input-group">
+                    <label>Tanggal</label>
+                    <input type="text" id="tgl" placeholder="DD / MM / YYYY" maxlength="14">
+                </div>
+                <div class="input-group">
+                    <label>Waktu</label>
+                    <input type="text" id="wkt" placeholder="HH : MM" maxlength="7">
+                </div>
+            </div>
+
             <button class="process-btn" id="proc">Processed</button>
         </div>
     </div>
@@ -136,7 +133,7 @@
 
         fileInput.addEventListener('change', function() {
             if (this.files.length > 8) {
-                alert("⛔ CANCEL! Maksimal photo 8.");
+                alert("⛔ CANCEL! Maksimal Input Photo 8.");
                 this.value = ""; preview.innerHTML = ""; placeholder.style.display = "block";
                 return;
             }
@@ -194,8 +191,6 @@
             this.value = out;
         });
 
-        document.getElementById('proc').addEventListener('click', () => {
-            alert("SEDANG MENGIRIM DATA KE N8N...");
         });
     </script>
 </body>
