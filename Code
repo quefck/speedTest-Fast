@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uploud Speed Test Harian</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* Navigasi Atas */
+        .navbar {
+            display: flex;
+            justify-content: flex-end;
+            padding: 30px 50px;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            margin-left: 40px;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            opacity: 0.7;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+            color: #28a745;
+        }
+
+        /* Kontainer Utama */
+        .main-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8%;
+            gap: 40px;
+        }
+
+        /* Sisi Kiri: Judul */
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 4rem;
+            line-height: 1;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: #888;
+            margin-bottom: 30px;
+        }
+
+        #startBtn {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 15px 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        #startBtn:hover {
+            background-color: #218838;
+            box-shadow: 0 0 20px rgba(40, 167, 69, 0.4);
+        }
+
+        /* Sisi Kanan: Kotak Canggih (Glassmorphism) */
+        .dashboard-box {
+            flex: 1;
+            max-width: 450px;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px); /* Efek Blur */
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            display: none; /* Muncul setelah klik Start */
+            animation: fadeInRight 0.8s ease forwards;
+        }
+
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Bagian Upload Photo */
+        .upload-area {
+            border: 2px dashed rgba(40, 167, 69, 0.5);
+            border-radius: 12px;
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .upload-area:hover {
+            background: rgba(40, 167, 69, 0.05);
+            border-color: #28a745;
+        }
+
+        .upload-area span {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .max-photo {
+            font-size: 11px;
+            color: #666;
+            text-align: center;
+            margin-bottom: 25px;
+            display: block;
+        }
+
+        /* Input Group (Tanggal & Waktu) */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .input-group input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            color: white;
+            border-radius: 8px;
+            outline: none;
+        }
+
+        /* Tombol Process */
+        .process-btn {
+            width: 100%;
+            background: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .process-btn:hover {
+            background: #28a745;
+            color: white;
+        }
+
+        /* Responsif HP */
+        @media (max-width: 900px) {
+            .main-container { flex-direction: column; padding: 40px 5%; }
+            .hero-text { text-align: center; }
+            .dashboard-box { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="#">Daftar</a>
+            <a href="#">Login</a>
+            <a href="#">About</a>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="hero-text">
+            <h1>Uploud Speed test Harian</h1>
+            <p>Gedung-gedung kementrian pekerja umum</p>
+            <button id="startBtn">Start</button>
+        </div>
+
+        <div class="dashboard-box" id="dashboard">
+            <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+                <span>+ + +</span>
+                <p>Import Photo Result</p>
+                <input type="file" id="fileInput" hidden multiple accept="image/*">
+            </div>
+            <small class="max-photo">*maximal photo 8</small>
+
+            <div class="info-grid">
+                <div class="input-group">
+                    <label>Tanggal</label>
+                    <input type="text" id="dateInput" placeholder="../../....">
+                </div>
+                <div class="input-group">
+                    <label>Waktu Import</label>
+                    <input type="text" id="timeInput" placeholder=".. : ..">
+                </div>
+            </div>
+
+            <button class="process-btn" id="processBtn">Processed</button>
+        </div>
+    </main>
+
+    <script>
+        const startBtn = document.getElementById('startBtn');
+        const dashboard = document.getElementById('dashboard');
+        const processBtn = document.getElementById('processBtn');
+
+        // Link Webhook n8n kamu (Tempel di sini nanti)
+        const N8N_WEBHOOK_URL = 'MASUKKAN_URL_WEBHOOK_N8N_KAMU';
+
+        // Munculkan Dashboard saat klik Start
+        startBtn.addEventListener('click', () => {
+            startBtn.style.display = 'none';
+            dashboard.style.display = 'block';
+            
+            // Auto fill tanggal & waktu sekarang
+            const sekarang = new Date();
+            document.getElementById('dateInput').value = sekarang.toLocaleDateString('id-ID');
+            document.getElementById('timeInput').value = sekarang.toLocaleTimeString('id-ID', {hour: '2-digit', minute:'2-digit'});
+        });
+
+        // Kirim data ke n8n saat klik Processed
+        processBtn.addEventListener('click', async () => {
+            processBtn.innerText = "Processing...";
+            
+            const data = {
+                tanggal: document.getElementById('dateInput').value,
+                waktu: document.getElementById('timeInput').value,
+                lokasi: "Gedung Kementrian PU",
+                status: "Data Ready to Process"
+            };
+
+            try {
+                const response = await fetch(N8N_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if(response.ok) {
+                    alert('Data Berhasil dikirim ke n8n!');
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Gagal kirim ke n8n. Cek URL Webhook kamu.');
+            } finally {
+                processBtn.innerText = "Processed";
+            }
+        });
+    </script>
+</body>
+</html>
