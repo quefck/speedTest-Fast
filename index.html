@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uploud Speed Test Harian</title>
+    <style>
+        /* Mengatur ulang margin dan font dasar */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Latar belakang hitam dan teks putih */
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navigasi Kanan Atas */
+        .navbar {
+            display: flex;
+            justify-content: flex-end;
+            padding: 30px 50px;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            margin-left: 40px;
+            font-size: 16px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #28a745; /* Berubah hijau saat di-hover */
+        }
+
+        /* Kontainer Utama (Layout Kiri-Kanan) */
+        .hero {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            padding: 0 10%;
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 650px;
+        }
+
+        /* Teks Besar */
+        .hero-content h1 {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        /* Teks Kecil */
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 40px;
+            color: #cccccc; /* Sedikit abu-abu agar terlihat elegan */
+            font-weight: 400;
+        }
+
+        /* Tombol Start Hijau */
+        .hero-content button {
+            background-color: #28a745; /* Warna hijau */
+            color: #ffffff; /* Teks putih */
+            border: none;
+            padding: 15px 45px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 30px; /* Membuat tombol berbentuk kapsul/bulat */
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .hero-content button:hover {
+            background-color: #218838; /* Hijau lebih gelap saat di-hover */
+            transform: scale(1.05); /* Sedikit membesar saat di-hover */
+        }
+
+        /* Area kosong di kanan (mengikuti struktur gambar asli) */
+        .hero-image {
+            flex: 1;
+        }
+
+        /* Responsif untuk layar HP */
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+            .navbar {
+                justify-content: center;
+                padding: 20px;
+            }
+            .nav-links a {
+                margin: 0 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-links">
+            <a href="#">Daftar</a>
+            <a href="#">Login</a>
+            <a href="#">About</a>
+        </div>
+    </nav>
+
+    <main class="hero">
+        <div class="hero-content">
+            <h1>Uploud Speed test Harian</h1>
+            <p>Gedung-gedung kementrian pekerja umum</p>
+            <button id="startBtn">Start</button>
+        </div>
+        <div class="hero-image">
+            </div>
+    </main>
+
+    <script>
+        // Mengambil elemen tombol berdasarkan ID
+        const startButton = document.getElementById('startBtn');
+
+        // Menambahkan aksi ketika tombol diklik
+        startButton.addEventListener('click', function() {
+            // Mengubah teks tombol saat proses berjalan
+            this.innerText = "Connecting...";
+            this.style.backgroundColor = "#1e7e34";
+
+            // Simulasi proses menggunakan alert
+            setTimeout(() => {
+                alert('Memulai Upload Speed Test untuk jaringan gedung kementerian...');
+                this.innerText = "Start";
+                this.style.backgroundColor = "#28a745";
+            }, 500);
+        });
+    </script>
+</body>
+</html>
