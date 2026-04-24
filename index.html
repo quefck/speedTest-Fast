@@ -74,17 +74,20 @@
             </div>
             <span class="small-text">maximal photo 8</span>
 
-            <div class="input-row">
-                <div class="input-group">
-                    <label>Tanggal</label>
-                    <input type="date" id="tgl">
-                </div>
-                <div class="input-group">
-                    <label>Waktu</label>
-                    <input type="time" id="wkt">
-                </div>
-            </div>
-
+   <div class="input-row">
+    <div class="input-group">
+        <label>Tanggal</label>
+        <input type="text" id="tgl" placeholder="Pilih Tanggal" 
+               onfocus="(this.type='date')" 
+               onblur="(this.type='text')">
+    </div>
+    <div class="input-group">
+        <label>Waktu</label>
+        <input type="text" id="wkt" placeholder="Pilih Waktu" 
+               onfocus="(this.type='time')" 
+               onblur="(this.type='text')">
+    </div>
+</div>
             <button class="process-btn" id="proc">Processed</button>
         </div>
     </div>
